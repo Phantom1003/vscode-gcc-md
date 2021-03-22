@@ -1,0 +1,35 @@
+{
+    "name": "gcc-md",
+    "displayName": "GCC Machine Description",
+    "description": "",
+    "version": "0.0.1",
+    "engines": {
+        "vscode": "^1.54.0"
+    },
+    "categories": [
+        "Programming Languages"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "gcc-md",
+                "aliases": [
+                    "gcc-md",
+                    "gcc-md"
+                ],
+                "extensions": [
+                    ".md"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "gcc-md",
+                "scopeName": "source.md",
+                "path": "./syntaxes/gcc-md.tmLanguage.json"
+            }
+        ]
+    },
+    "devDependencies": {}
+}

@@ -1,0 +1,62 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "gcc-md",
+	"patterns": [
+		{
+			"include": "#comments"
+		},
+		{
+			"include": "#expressions"
+		}
+	],
+	"repository": {
+		"comments": {
+			"patterns": [{
+				"comment": "comments start with ;;",
+				"name": "comment.line.percentage.gcc-md",
+				"match": ";;(.)*"
+			}]
+		},
+		"keywords": {
+			"patterns": [
+				{
+				"comment":"function name",
+				"name": "entity.name.function.gcc-md",
+				"match": "\\b(define_attr|define_asm_attributes|define_mode_iterator|define_mode_attr|define_int_iterator|define_int_attr|define_code_iterator|define_code_attr|define_insn|define_insn_reservation|define_insn_and_split|define_split|define_expand)\\b"
+				},
+				{}
+			]
+		},
+
+		"expressions":{ 
+			"name": "expression.group.gcc-md",
+			"begin": "\\(",
+			"end": "\\)",
+			"beginCaptures": {
+				"0": { "name": "entity.name.open.gcc-md" }
+			},
+			"endCaptures": {
+				"0": { "name": "entity.name.close.gcc-md" }
+			},
+			"patterns": [
+				{ "include": "#comments" },
+				{ "include": "$self" },
+				{ "include": "#keywords" }
+				
+			]
+		},
+
+		"strings": {
+			"name": "string.quoted.double.gcc-md",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.gcc-md",
+					"match": "\\\\."
+				}
+			]
+		}
+	},
+	"scopeName": "source.md"
+}
