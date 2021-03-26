@@ -2,6 +2,7 @@
     "name": "gcc-md",
     "displayName": "GCC Machine Description",
     "description": "",
+    "publisher": "phantom1003",
     "version": "0.0.1",
     "engines": {
         "vscode": "^1.54.0"
@@ -26,7 +27,7 @@
         "grammars": [
             {
                 "language": "gcc-md",
-                "scopeName": "source.md",
+                "scopeName": "source.gcc-md",
                 "path": "./syntaxes/gcc-md.tmLanguage.json"
             }
         ]

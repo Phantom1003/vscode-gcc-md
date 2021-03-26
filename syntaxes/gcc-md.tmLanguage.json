@@ -12,7 +12,7 @@
 	"repository": {
 		"comments": {
 			"patterns": [{
-				"comment": "comments start with ;;",
+				"comment": "comments",
 				"name": "comment.line.percentage.gcc-md",
 				"match": ";;(.)*"
 			}]
@@ -20,32 +20,42 @@
 		"keywords": {
 			"patterns": [
 				{
-				"comment":"function name",
-				"name": "entity.name.function.gcc-md",
-				"match": "\\b(define_attr|define_asm_attributes|define_mode_iterator|define_mode_attr|define_int_iterator|define_int_attr|define_code_iterator|define_code_attr|define_insn|define_insn_reservation|define_insn_and_split|define_split|define_expand)\\b"
+					"comment":"RTL template expression function keyword",
+					"name": "entity.name.function.gcc-md",
+					"match": "\\b(match_operand|match_scratch|match_dup|match_operator|match_op_dup|match_parallel|match_par_dup)\\b"					
 				},
-				{}
-			]
+				{
+					"comment":"function name set 1",
+					"name": "entity.name.function.gcc-md",
+					"match": "\\b(define_attr|define_asm_attributes|define_mode_iterator|define_mode_attr|define_int_iterator|define_int_attr)\\b"
+				},
+				{
+					"comment":"function name set 2",
+					"name": "entity.name.function.gcc-md",
+					"match": "\\b(define_code_iterator|define_code_attr|define_insn|define_insn_reservation|define_insn_and_split|define_split|define_expand|define_c_enum|define_constants)\\b"
+				},
+				{
+					"comment":"keyword",
+					"name": "keyword.control.gcc-md",
+					"match": "\\b(set|include|symbol_ref|return|set_attr|if_then_else|use|call)\\b"
+				},
+				{
+					"comment":"compare",
+					"name": "keyword.operator.comparison.gcc-md",
+					"match": "\\b(and|eq|ne|cond|eq_attr)\\b"
+				},
+				{
+					"comment":"const function",
+					"name": "storage.type.built-in.primitive",
+					"match": "\\b(const_string|const_int)\\b"
+				},
+				{
+					"comment":"const",
+					"name": "constant.numeric.gcc-md",
+					"match": "\\b([0-9])+\\b"
+				}
+		]
 		},
-
-		"expressions":{ 
-			"name": "expression.group.gcc-md",
-			"begin": "\\(",
-			"end": "\\)",
-			"beginCaptures": {
-				"0": { "name": "entity.name.open.gcc-md" }
-			},
-			"endCaptures": {
-				"0": { "name": "entity.name.close.gcc-md" }
-			},
-			"patterns": [
-				{ "include": "#comments" },
-				{ "include": "$self" },
-				{ "include": "#keywords" }
-				
-			]
-		},
-
 		"strings": {
 			"name": "string.quoted.double.gcc-md",
 			"begin": "\"",
@@ -56,7 +66,21 @@
 					"match": "\\\\."
 				}
 			]
+		},
+
+		"expressions":{ 
+			"name": "meta.block.gcc-md",
+			"begin": "\\(",
+			"end": "\\)",
+			"beginCaptures": { "0": { "name": "punctuation.section.parameters.begin.bracket.round.gcc-md" } },
+			"endCaptures": { "0": { "name": "punctuation.section.parameters.end.bracket.round.gcc-md" } },
+			"patterns": [
+				{ "include": "$self" },
+				{ "include": "#comments" },
+				{ "include": "#keywords" },
+				{ "include": "#strings" }
+			]
 		}
 	},
-	"scopeName": "source.md"
+	"scopeName": "source.gcc-md"
 }
